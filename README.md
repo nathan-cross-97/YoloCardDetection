@@ -1,12 +1,24 @@
 # YoloCardDetection
 
-Created 40,000 synthetic images of cards to train a YOLO detection model on using the Darknet frame work
+The goal is to create a custom YOLO detection model to detect playing cards (Value and Suit).
+
+
+## Creating the data set
+
+First, I had to create the dataset to train the model on. I took 52 videos of each playing card under varying lighting conditions. From there, using OpenCV, I extracted the card and created teh boudning boxes for the trianing data. I then used imgaug and shapely to apply tranformations to cards. I also downloaded 600+ backgrounds to overlay the cards on. Using these methods, I created 40,000 synthetic images of cards (20,000 with two cards, 20,0000 with three cards) to train a YOLO detection model on using the Darknet framework.
+
+All credit goes geaxgx1 on Youtube for the framework mentioned above: https://www.youtube.com/watch?v=pnntrewH0xg&t=219s&ab_channel=geaxgx1
 
 ![356404133](https://github.com/user-attachments/assets/24586e36-8735-463b-816d-c427a81676e6)
 
 Example of synthetic training images
 
-From there, I trained a YoloV4 model on this data set using the darknet frame work. The ultimate results were as follows:
+
+## Training the model 
+
+From there, I trained a YoloV4 model on this data set using the darknet framework. I have a Google Colab sheet which goes more in depth on the training of the model. Overall, it took a few hours and 4000 iterations to get results I was looking for.
+
+The ultimate results were as follows:
 
 detections_count = 1873, unique_truth_count = 446  
 class_id = 0, name = Ah, ap = 100.00%   	 (TP = 14, FP = 0) 
@@ -69,12 +81,14 @@ class_id = 51, name = 2s, ap = 100.00%   	 (TP = 6, FP = 0)
  mean average precision (mAP@0.50) = 1.000000, or 100.00 % 
 
 
-This model can be run on pictures or videos. 
 
+## Testing 
 
-
+This model can be run on pictures or videos. It works best when the camera is not moving.
 
 https://github.com/user-attachments/assets/6b049281-a974-48e6-93fa-f19b3f641901
 
+## Further development
 
+I like to play Poker and tracking hands while playing Live (in-person) is time consuming and easy to make mistakes. I think it would be awesome to be able to place a camera down and automatically capture the hole cards, flop, turn, and river cards, as well as use some additional computer vision models or speech to text models to determine player postion and bet sizing on each street. 
 
